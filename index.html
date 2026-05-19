@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#4BBFBF;font-family:'Share Tech Mono',monospace;padding:12px;min-height:100vh;background-image:repeating-linear-gradient(0deg,transparent,transparent 31px,rgba(0,0,0,.04) 31px,rgba(0,0,0,.04) 32px),repeating-linear-gradient(90deg,transparent,transparent 31px,rgba(0,0,0,.04) 31px,rgba(0,0,0,.04) 32px)}
+.taskbar{background:#1a1a1a;color:#F2CA50;font-family:'VT323',monospace;font-size:20px;padding:6px 14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-radius:4px;border:2px solid #F2CA50}
+.taskbar .links{display:flex;gap:16px;font-size:15px}
+.taskbar a{color:#4BBFBF;text-decoration:none}
+.taskbar a:hover{color:#F2CA50}
+.window{background:#fff;border:2.5px solid #1a1a1a;border-radius:8px;margin-bottom:12px;overflow:hidden;position:relative}
+.window::before{content:'';position:absolute;top:3px;left:3px;right:-3px;bottom:-3px;background:#1a1a1a;border-radius:8px;z-index:-1}
+.titlebar{background:#1570AC;color:#fff;padding:6px 10px;display:flex;align-items:center;justify-content:space-between;font-family:'VT323',monospace;font-size:20px}
+.titlebar .left{display:flex;align-items:center;gap:8px}
+.titlebar .winbtns{display:flex;gap:5px}
+.wbtn{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;font-size:8px;cursor:pointer;font-family:monospace}
+.wbtn.r{background:#F2762E}.wbtn.y{background:#F2CA50}.wbtn.g{background:#74A65D}
+.win-body{padding:14px}
+
+/* HERO */
+.hero-grid{display:grid;grid-template-columns:140px 1fr;gap:14px;align-items:start}
+.photo-wrap{position:relative}
+.photo-box{background:#F2AF5C;border:2.5px solid #1a1a1a;border-radius:8px;overflow:hidden;aspect-ratio:3/4;position:relative}
+.photo-box img{width:100%;height:100%;object-fit:cover;object-position:top}
+.sticker{position:absolute;font-size:22px;line-height:1}
+.sticker.s1{top:-10px;right:-10px;transform:rotate(15deg)}
+.sticker.s2{bottom:-8px;left:-8px;transform:rotate(-10deg);font-size:18px}
+.cursor-deco{position:absolute;bottom:6px;right:6px;font-size:11px;background:#F2CA50;color:#1a1a1a;padding:2px 6px;border-radius:3px;border:1.5px solid #1a1a1a;font-family:'VT323',monospace;font-size:14px}
+.info-box{display:flex;flex-direction:column;gap:8px}
+.name-window{background:#1570AC;border:2px solid #1a1a1a;border-radius:6px;overflow:hidden}
+.name-titlebar{background:#F2762E;padding:3px 8px;font-size:12px;display:flex;align-items:center;gap:4px}
+.name-body{padding:8px 10px;color:#F2CA50;font-family:'VT323',monospace;font-size:30px;line-height:1.05}
+.bio-box{background:#F2CA50;border:2px solid #1a1a1a;border-radius:6px;padding:8px 10px;font-size:11px;color:#1a1a1a;line-height:1.65;position:relative}
+.bio-box::after{content:'💬';position:absolute;top:-12px;right:8px;font-size:16px}
+.pill-row{display:flex;flex-wrap:wrap;gap:5px}
+.pill{border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;border:1.5px solid #1a1a1a;cursor:default}
+.pill.org{background:#F2762E;color:#fff}
+.pill.blue{background:#1570AC;color:#fff}
+.pill.grn{background:#74A65D;color:#fff}
+.pill.teal{background:#4BBFBF;color:#1a1a1a}
+.pill.yel{background:#F2CA50;color:#1a1a1a}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.citem{background:#F2AF5C;border:2px solid #1a1a1a;border-radius:6px;padding:8px 10px;position:relative;overflow:hidden}
+.citem::before{content:'';position:absolute;bottom:0;right:0;width:30px;height:30px;background:rgba(0,0,0,.05);border-radius:30px 0 0 0}
+.citem .label{font-family:'VT323',monospace;font-size:16px;color:#74A65D;display:block;margin-bottom:1px}
+.citem .val{font-size:11px;color:#1a1a1a}
+.citem .ico{position:absolute;top:8px;right:10px;font-size:18px}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sec-title{font-family:'VT323',monospace;font-size:24px;color:#F2762E;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.sec-title::after{content:'';flex:1;border-bottom:2px dashed #F2CA50;margin-left:4px}
+
+/* EXPERIENCE */
+.exp-item{border-left:3px solid #1570AC;padding:7px 10px;margin-bottom:8px;background:#f5f5f5;border-radius:0 6px 6px 0;position:relative}
+.exp-item::before{content:'▶';position:absolute;left:-10px;top:50%;transform:translateY(-50%);font-size:10px;color:#1570AC}
+.exp-year{font-family:'VT323',monospace;font-size:13px;background:#F2CA50;color:#1a1a1a;padding:1px 7px;border-radius:10px;display:inline-block;margin-bottom:4px;border:1px solid #1a1a1a}
+.exp-item h4{font-family:'VT323',monospace;font-size:17px;color:#1570AC;margin-bottom:2px}
+.exp-item p{font-size:11px;color:#666;line-height:1.5}
+
+/* AWARDS */
+.award-item{background:#F2CA50;border:2px solid #1a1a1a;border-radius:6px;padding:9px 10px;margin-bottom:8px;display:flex;gap:8px;align-items:flex-start;position:relative;overflow:hidden}
+.award-item::after{content:'★';position:absolute;bottom:-4px;right:4px;font-size:28px;color:rgba(242,119,46,.2)}
+.award-emo{font-size:20px;flex-shrink:0;margin-top:1px}
+.award-item h4{font-family:'VT323',monospace;font-size:15px;color:#F2762E;margin-bottom:2px}
+.award-item p{font-size:11px;color:#555;line-height:1.4}
+
+/* SKILLS */
+.skills-wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.skill-group h3{font-family:'VT323',monospace;font-size:18px;color:#1570AC;margin-bottom:8px;background:#e8f4ff;padding:3px 8px;border-radius:4px;border:1.5px solid #1570AC;display:inline-block}
+.skill-bar-row{margin-bottom:7px}
+.skill-bar-row .sname{font-size:11px;color:#1a1a1a;margin-bottom:3px;display:flex;justify-content:space-between}
+.bar-bg{background:#e0e0e0;border-radius:3px;height:8px;border:1.5px solid #1a1a1a;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px}
+.bar-fill.org{background:#F2762E}
+.bar-fill.blue{background:#1570AC}
+.bar-fill.grn{background:#74A65D}
+.bar-fill.teal{background:#4BBFBF}
+.softskill-wrap{display:flex;flex-wrap:wrap;gap:6px}
+.sskill{border:2px solid #1a1a1a;border-radius:6px;padding:5px 10px;font-family:'VT323',monospace;font-size:15px}
+.sskill.org{background:#F2762E;color:#fff}
+.sskill.blue{background:#1570AC;color:#fff}
+.sskill.grn{background:#74A65D;color:#fff}
+.sskill.teal{background:#4BBFBF;color:#1a1a1a}
+.sskill.yel{background:#F2CA50;color:#1a1a1a}
+
+/* MARQUEE */
+.deco-bar{background:#F2762E;color:#fff;text-align:center;font-family:'VT323',monospace;font-size:16px;padding:4px;letter-spacing:3px;border-bottom:2px solid #1a1a1a}
+.floating-tag{background:#F2CA50;border:2px solid #1a1a1a;border-radius:20px;font-family:'VT323',monospace;font-size:14px;padding:3px 10px;color:#1a1a1a}
+.status-dot{width:8px;height:8px;background:#74A65D;border-radius:50%;display:inline-block;margin-right:4px;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.marquee-wrap{background:#1a1a1a;color:#F2CA50;font-family:'VT323',monospace;font-size:16px;padding:4px 0;overflow:hidden;border-top:2px solid #F2CA50;border-bottom:2px solid #F2CA50;margin:10px 0}
+.marquee-inner{white-space:nowrap;display:inline-block;animation:marquee 18s linear infinite}
+@keyframes marquee{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+</style>
+</head>
+<body>
+
+<div class="taskbar">
+  <span>🖥️ MY PORTFOLIO</span>
+  <div class="links">
+    <a href="#about">about</a>
+    <a href="#contact">contact</a>
+    <a href="#exp">exp</a>
+    <a href="#skills">skills</a>
+  </div>
+  <span id="clk">--:--:--</span>
+</div>
+
+<!-- ABOUT -->
+<div class="window" id="about">
+  <div class="deco-bar">✦ WWW.ABOUTME.COM ✦</div>
+  <div class="titlebar">
+    <div class="left">
+      <div class="winbtns">
+        <div class="wbtn r">✕</div>
+        <div class="wbtn y">-</div>
+        <div class="wbtn g">□</div>
+      </div>
+      <span>ABOUT ME</span>
+    </div>
+    <span class="floating-tag"><span class="status-dot"></span>online</span>
+  </div>
+  <div class="win-body">
+    <div class="hero-grid">
+      <div class="photo-wrap">
+        <div class="photo-box">
+          <!-- Ganti src dengan nama file foto kamu -->
+          <img src="img src="691340913_26773569078920717_4112885642669278959_n.jpg" alt="foto">
+          <div class="cursor-deco">👆 it's me!</div>
+        </div>
+        <div class="sticker s1">👑</div>
+        <div class="sticker s2">🌟</div>
+      </div>
+      <div class="info-box">
+        <div class="name-window">
+          <div class="name-titlebar">🖥️ www.about.me</div>
+          <div class="name-body">Anindya Pramidita<br><span style="color:#F2CA50">Rarasati</span></div>
+        </div>
+        <div class="bio-box">Halo! Saya siswa SMA yang passionate di bidang [minat]. Selalu berusaha berkembang dan menciptakan hal yang bermakna setiap harinya ✨</div>
+        <div class="pill-row">
+          <span class="pill org">🎨 Creative</span>
+          <span class="pill blue">💪 Achiever</span>
+          <span class="pill grn">🌱 SMA 2026</span>
+          <span class="pill teal">📍 Jakarta</span>
+          <span class="pill yel">☕ Coffee lover</span>
+        </div>
+      </div>
+    </div>
+    <div class="marquee-wrap">
+      <div class="marquee-inner">✦ open to opportunities ✦ passionate learner ✦ creative thinker ✦ team player ✦ always growing ✦ open to opportunities ✦ passionate learner ✦ creative thinker ✦</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="window" id="contact">
+  <div class="titlebar">
+    <div class="left">
+      <div class="winbtns">
+        <div class="wbtn r">✕</div><div class="wbtn y">-</div><div class="wbtn g">□</div>
+      </div>
+      <span>CONTACT ME 📬</span>
+    </div>
+  </div>
+  <div class="win-body">
+    <div class="contact-grid">
+      <div class="citem"><div class="ico">📸</div><span class="label">Instagram</span><div class="val">@username</div></div>
+      <div class="citem"><div class="ico">✉️</div><span class="label">Email</span><div class="val">name@gmail.com</div></div>
+      <div class="citem"><div class="ico">💬</div><span class="label">WhatsApp</span><div class="val">+62 xxx xxxx xxxx</div></div>
+      <div class="citem"><div class="ico">📍</div><span class="label">Location</span><div class="val">Jakarta, Indonesia</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- EXP & AWARDS -->
+<div class="window" id="exp">
+  <div class="titlebar">
+    <div class="left">
+      <div class="winbtns">
+        <div class="wbtn r">✕</div><div class="wbtn y">-</div><div class="wbtn g">□</div>
+      </div>
+      <span>EXPERIENCE & AWARDS 🏆</span>
+    </div>
+    <span style="font-size:13px;opacity:.8">↗ expand</span>
+  </div>
+  <div class="win-body">
+    <div class="two-col">
+      <div>
+        <div class="sec-title">// EXP</div>
+        <div class="exp-item">
+          <div class="exp-year">2024</div>
+          <h4>OSIS Secretary</h4>
+          <p>Mengorganisir kegiatan & acara tahunan sekolah bersama tim OSIS.</p>
+        </div>
+        <div class="exp-item">
+          <div class="exp-year">2023</div>
+          <h4>Magazine Editor</h4>
+          <p>Menulis & mengedit konten majalah sekolah edisi tahunan.</p>
+        </div>
+        <div class="exp-item">
+          <div class="exp-year">2022</div>
+          <h4>Volunteer Teacher</h4>
+          <p>Mengajar anak-anak SD di komunitas lokal setiap akhir pekan.</p>
+        </div>
+      </div>
+      <div>
+        <div class="sec-title">// AWARDS</div>
+        <div class="award-item"><div class="award-emo">🥇</div><div><h4>1st — Science Olympiad</h4><p>Juara 1 Olimpiade Sains Nasional tingkat Kota, 2024.</p></div></div>
+        <div class="award-item"><div class="award-emo">🏆</div><div><h4>Best Essay National</h4><p>Tulisan terbaik dari 500+ peserta lomba esai nasional.</p></div></div>
+        <div class="award-item"><div class="award-emo">🎤</div><div><h4>Debate Champion</h4><p>Juara 2 debat Bahasa Inggris tingkat Provinsi.</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="window" id="skills">
+  <div class="titlebar">
+    <div class="left">
+      <div class="winbtns">
+        <div class="wbtn r">✕</div><div class="wbtn y">-</div><div class="wbtn g">□</div>
+      </div>
+      <span>SKILLS.EXE 💾</span>
+    </div>
+  </div>
+  <div class="win-body">
+    <div class="skills-wrap">
+      <div class="skill-group">
+        <h3>// HARD SKILLS</h3>
+        <div class="skill-bar-row"><div class="sname"><span>Photoshop</span><span>80%</span></div><div class="bar-bg"><div class="bar-fill org" style="width:80%"></div></div></div>
+        <div class="skill-bar-row"><div class="sname"><span>Canva</span><span>90%</span></div><div class="bar-bg"><div class="bar-fill blue" style="width:90%"></div></div></div>
+        <div class="skill-bar-row"><div class="sname"><span>MS Office</span><span>85%</span></div><div class="bar-bg"><div class="bar-fill grn" style="width:85%"></div></div></div>
+        <div class="skill-bar-row"><div class="sname"><span>Public Speaking</span><span>75%</span></div><div class="bar-bg"><div class="bar-fill teal" style="width:75%"></div></div></div>
+      </div>
+      <div class="skill-group">
+        <h3>// SOFT SKILLS</h3>
+        <div class="softskill-wrap">
+          <span class="sskill org">👑 Leadership</span>
+          <span class="sskill blue">💬 Communication</span>
+          <span class="sskill grn">🤝 Teamwork</span>
+          <span class="sskill teal">⚡ Adaptability</span>
+          <span class="sskill yel">🧠 Problem Solving</span>
+          <span class="sskill org">🎯 Detail-oriented</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function tick(){
+  document.getElementById('clk').textContent =
+    new Date().toLocaleTimeString('id-ID');
+}
+tick(); setInterval(tick, 1000);
+</script>
+</body>
+</html>
